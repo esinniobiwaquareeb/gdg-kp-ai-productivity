@@ -2,7 +2,7 @@
 import { useState } from "react";
 
 export default function SessionTracking() {
-  const [sessions, setSessions] = useState([]);
+  const [sessions, setSessions] = useState<{ duration: number; date: string }[]>([]);
   const [timer, setTimer] = useState(0);
   const [active, setActive] = useState(false);
   const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
@@ -31,7 +31,7 @@ export default function SessionTracking() {
         <span className="text-lg font-mono">{Math.floor(timer / 60)}:{(timer % 60).toString().padStart(2, '0')}</span>
       </div>
       <ul className="space-y-2">
-        {sessions.map((s, idx) => (
+        {sessions.map((s: { duration: number; date: string }, idx: number) => (
           <li key={idx} className="text-sm text-gray-700 dark:text-gray-300">
             Session {idx + 1}: {Math.floor(s.duration / 60)}:{(s.duration % 60).toString().padStart(2, '0')} ({s.date})
           </li>
